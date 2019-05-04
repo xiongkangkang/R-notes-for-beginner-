@@ -124,3 +124,44 @@ paste(1:10)  #  same as as.character(1:10)
 paste("Today is",date())
 paste(c("a","b"),collapse = ".")
 ```
+
+##  数组和矩阵
+```{r}
+# 将向量定义为数组，向量只有定义了维数向量（dim属性）后才能被看作是数组
+z <- 1:12
+dim(z) <- c(3,4)
+z
+# array()函数生成数组，其结构形式为 array(data = NA，dim = length(data),dimnames = NULL)
+X <- array(1:20,dim = c(4,5))
+X
+# 用matrix()函数构造矩阵,★matrix()默认按列排列
+A <- matrix(1:15,nrow = 3,ncol = 5,byrow = TRUE)
+A        
+# 矩阵运算
+##  转置运算
+A <- matrix(1:6,nrow = 2)
+A
+t(A) # t()函数用于矩阵的转置
+```
+
+##  数据框
+一般来讲，CSV读入的数据都是数据框类型。数据框与矩阵的区别在于数据框只要求列内数据类型相同，而矩阵要求所有数据均未数字型？整数。
+```{r}
+#生成数据框的函数为data.frame(),函数内赋值用"=",不可用"<-"
+df <- data.frame(
+  Name = c ("Alice","Becka","James","Jeffrey","John"), 
+  Sex = c ("F", "F", "M", "M", "M"),
+  Age = c(13,13,12,13,12),
+  Height = c(56.5,65.3,57.3,62.5,59.0),
+  Weight = c(84.0,98.0,83.0,84.0,99.5)
+  )
+df
+# 数据框引用
+df[1:2,3:5]
+df[["Height"]]
+df$Height  #用[["Height"]]或者$进行引用均可以
+#  数据框命名
+names(df)
+rownames(df) <- c("one","two","three","four","five")
+df
+```

@@ -1717,9 +1717,86 @@ y</code></pre>
 paste(1:10)  #  same as as.character(1:10)</code></pre>
 <pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</code></pre>
 <pre class="r"><code>paste(&quot;Today is&quot;,date())</code></pre>
-<pre><code>## [1] &quot;Today is Sat May 04 12:58:31 2019&quot;</code></pre>
+<pre><code>## [1] &quot;Today is Sat May 04 16:00:32 2019&quot;</code></pre>
 <pre class="r"><code>paste(c(&quot;a&quot;,&quot;b&quot;),collapse = &quot;.&quot;)</code></pre>
 <pre><code>## [1] &quot;a.b&quot;</code></pre>
+</div>
+<div id="section-2" class="section level2">
+<h2><span class="header-section-number">2.2</span> 数组和矩阵</h2>
+<pre class="r"><code># 将向量定义为数组，向量只有定义了维数向量（dim属性）后才能被看作是数组
+z &lt;- 1:12
+dim(z) &lt;- c(3,4)
+z</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<pre class="r"><code># array()函数生成数组，其结构形式为 array(data = NA，dim = length(data),dimnames = NULL)
+X &lt;- array(1:20,dim = c(4,5))
+X</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    5    9   13   17
+## [2,]    2    6   10   14   18
+## [3,]    3    7   11   15   19
+## [4,]    4    8   12   16   20</code></pre>
+<pre class="r"><code># 用matrix()函数构造矩阵,★matrix()默认按列排列
+A &lt;- matrix(1:15,nrow = 3,ncol = 5,byrow = TRUE)
+A        </code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    6    7    8    9   10
+## [3,]   11   12   13   14   15</code></pre>
+<pre class="r"><code># 矩阵运算
+##  转置运算
+A &lt;- matrix(1:6,nrow = 2)
+A</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<pre class="r"><code>t(A) # t()函数用于矩阵的转置</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+</div>
+<div id="section-3" class="section level2">
+<h2><span class="header-section-number">2.3</span> 数据框</h2>
+<p>一般来讲，CSV读入的数据都是数据框类型。数据框与矩阵的区别在于数据框只要求列内数据类型相同，而矩阵要求所有数据均未数字型？整数。</p>
+<pre class="r"><code>#生成数据框的函数为data.frame(),函数内赋值用&quot;=&quot;,不可用&quot;&lt;-&quot;
+df &lt;- data.frame(
+  Name = c (&quot;Alice&quot;,&quot;Becka&quot;,&quot;James&quot;,&quot;Jeffrey&quot;,&quot;John&quot;), 
+  Sex = c (&quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;),
+  Age = c(13,13,12,13,12),
+  Height = c(56.5,65.3,57.3,62.5,59.0),
+  Weight = c(84.0,98.0,83.0,84.0,99.5)
+  )
+df</code></pre>
+<pre><code>##      Name Sex Age Height Weight
+## 1   Alice   F  13   56.5   84.0
+## 2   Becka   F  13   65.3   98.0
+## 3   James   M  12   57.3   83.0
+## 4 Jeffrey   M  13   62.5   84.0
+## 5    John   M  12   59.0   99.5</code></pre>
+<pre class="r"><code># 数据框引用
+df[1:2,3:5]</code></pre>
+<pre><code>##   Age Height Weight
+## 1  13   56.5     84
+## 2  13   65.3     98</code></pre>
+<pre class="r"><code>df[[&quot;Height&quot;]]</code></pre>
+<pre><code>## [1] 56.5 65.3 57.3 62.5 59.0</code></pre>
+<pre class="r"><code>df$Height  #用[[&quot;Height&quot;]]或者$进行引用均可以</code></pre>
+<pre><code>## [1] 56.5 65.3 57.3 62.5 59.0</code></pre>
+<pre class="r"><code>#  数据框命名
+names(df)</code></pre>
+<pre><code>## [1] &quot;Name&quot;   &quot;Sex&quot;    &quot;Age&quot;    &quot;Height&quot; &quot;Weight&quot;</code></pre>
+<pre class="r"><code>rownames(df) &lt;- c(&quot;one&quot;,&quot;two&quot;,&quot;three&quot;,&quot;four&quot;,&quot;five&quot;)
+df</code></pre>
+<pre><code>##          Name Sex Age Height Weight
+## one     Alice   F  13   56.5   84.0
+## two     Becka   F  13   65.3   98.0
+## three   James   M  12   57.3   83.0
+## four  Jeffrey   M  13   62.5   84.0
+## five     John   M  12   59.0   99.5</code></pre>
 </div>
 </div>
 
